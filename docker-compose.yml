@@ -18,3 +18,21 @@ services:
       context: ./frontend
     ports:
       - "3000:3000"
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: your_database_name  # User should replace this
+      POSTGRES_USER: your_username       # User should replace this
+      POSTGRES_PASSWORD: your_password    # User should replace this
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  elasticsearch:
+    image: elasticsearch:8.15.1
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+
+volumes:
+  db_data:
