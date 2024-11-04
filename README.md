@@ -26,6 +26,12 @@ This project is a Document Management System that leverages Natural Language Pro
 - Uvicorn
 - Any other libraries you are using (manually document here)
 
+Using Docker:
+
+Ensure Docker and Docker Compose are installed on your machine.
+Build and start the services using Docker Compose:
+docker-compose up --build
+
 ### Installation
 
 1. **Clone the repository**:
