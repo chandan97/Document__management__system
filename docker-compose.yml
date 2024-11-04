@@ -5,6 +5,10 @@ services:
     build:
       context: ./backend
       dockerfile: dockerfile  # Ensure this matches the filename
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOST=http://elasticsearch-1:9200
     ports:
       - "8000:8000"
     volumes:
@@ -22,17 +26,23 @@ services:
   db:
     image: postgres:latest
     environment:
-      POSTGRES_DB: your_database_name  # User should replace this
-      POSTGRES_USER: your_username       # User should replace this
-      POSTGRES_PASSWORD: your_password    # User should replace this
+      POSTGRES_DB: your_db_name
+      POSTGRES_USER: your_username
+      POSTGRES_PASSWORD: your_password
     volumes:
       - db_data:/var/lib/postgresql/data
   elasticsearch:
-    image: elasticsearch:8.15.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.1
+    container_name: elasticsearch-1
     environment:
       - discovery.type=single-node
+      - xpack.security.enabled=false
     ports:
-      - "9200:9200"
+      - "9201:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
 
 volumes:
+  esdata:
+    driver: local
   db_data:

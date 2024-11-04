@@ -58,7 +58,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 indexer = DocumentIndexer()
 
-es = Elasticsearch("http://localhost:9200")
+es = Elasticsearch("http://elasticsearch-1:9200")
 
 app.add_middleware(
     CORSMiddleware,

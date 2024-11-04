@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import openai ,os
 from transformers import pipeline
 
-es = Elasticsearch("http://localhost:9200")
+es = Elasticsearch("http://elasticsearch-1:9200")
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
